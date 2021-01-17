@@ -1,6 +1,8 @@
-import s from './Filter.module.css';
-import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import shortid from 'shortid';
+import PropTypes from 'prop-types';
+import * as types from '../../redux/actions';
+import s from './Filter.module.css';
 
 const Filter = ({ value, changeFilter }) => {
   const filterInputId = shortid.generate();
@@ -28,4 +30,12 @@ Filter.propTypes = {
   changeFilter: PropTypes.func,
 };
 
-export default Filter;
+const mapStateToProps = state => ({
+  value: state.phonebook.filter,
+});
+
+const mapDispatchToProps = dispatch => ({
+  changeFilter: e => dispatch(types.changeFilter(e.target.value)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Filter);

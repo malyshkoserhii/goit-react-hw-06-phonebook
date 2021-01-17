@@ -26,8 +26,16 @@ ContactsList.protoTypes = {
   onDeleteContact: PropTypes.func,
 };
 
-const mapStateToProps = state => ({
-  contacts: state.phonebook.items,
+const getFilteredContacts = (allContacts, filter) => {
+  const normalizedFilter = filter.toLocaleLowerCase();
+
+  return allContacts.filter(contact =>
+    contact.name.toLocaleLowerCase().includes(normalizedFilter),
+  );
+};
+
+const mapStateToProps = ({ phonebook: { items, filter } }) => ({
+  contacts: getFilteredContacts(items, filter),
 });
 
 const mapDispatchToProps = dispatch => ({

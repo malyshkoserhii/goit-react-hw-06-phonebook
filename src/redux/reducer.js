@@ -9,13 +9,22 @@ const items = (state = [], { type, payload }) => {
     case types.DELETE_CONTACT:
       return state.filter(contact => contact.id !== payload);
 
+    case types.GET_EXISTED_CONTACT:
+      return state.find(contact => contact.name === payload);
+
     default:
       return state;
   }
 };
 
-const filter = (state = '', action) => {
-  return state;
+const filter = (state = '', { type, payload }) => {
+  switch (type) {
+    case types.CHANGE_FILTER:
+      return payload;
+
+    default:
+      return state;
+  }
 };
 
 export default combineReducers({
