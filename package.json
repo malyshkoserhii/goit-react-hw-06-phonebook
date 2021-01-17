@@ -2,7 +2,7 @@
   "name": "react-template",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://malyshkoserhii.github.io/goit-react-hw-03-phonebook",
+  "homepage": "https://malyshkoserhii.github.io/goit-react-hw-06-phonebook",
   "dependencies": {
     "@reduxjs/toolkit": "^1.5.0",
     "@testing-library/jest-dom": "^5.11.6",
@@ -15,6 +15,7 @@
     "react-dom": "^17.0.1",
     "react-redux": "^7.2.2",
     "react-scripts": "4.0.1",
+    "redux": "^4.0.5",
     "shortid": "^2.2.16",
     "web-vitals": "^0.2.4"
   },
