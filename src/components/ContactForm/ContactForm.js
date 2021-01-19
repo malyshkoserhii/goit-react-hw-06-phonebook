@@ -30,15 +30,32 @@ class ContactForm extends Component {
     e.preventDefault();
     const { name, number } = this.state;
 
-    // if (this.props.exsisted(name)) {
-    //   alert(`${name} is alredy in contacts.`);
-    //   this.reset();
-    //   return;
-    // }
+    if (this.state.name.trim() === '') {
+      alert('Enter the name');
+      return;
+    }
 
-    this.props.onAddNewContact(name, number);
+    if (this.getExistedContact(name)) {
+      alert(`${name} is alredy in contacts.`);
+      this.reset();
+      return;
+    }
 
-    this.reset();
+    if (this.state.number.trim() === '') {
+      alert('Enter the phone number');
+      return;
+    }
+
+    if (name && number) {
+      this.props.onAddNewContact(name, number);
+      this.reset();
+      return;
+    }
+  };
+
+  getExistedContact = name => {
+    const { contacts } = this.props;
+    return contacts.find(contact => contact.name === name);
   };
 
   reset() {
@@ -85,8 +102,12 @@ class ContactForm extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  contacts: state.phonebook.items,
+});
+
 const mapDispatchToProps = dispatch => ({
   onAddNewContact: (name, number) => dispatch(actions.addContact(name, number)),
 });
 
-export default connect(null, mapDispatchToProps)(ContactForm);
+export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);
