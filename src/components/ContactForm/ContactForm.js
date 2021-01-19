@@ -30,11 +30,11 @@ class ContactForm extends Component {
     e.preventDefault();
     const { name, number } = this.state;
 
-    if (this.props.exsisted(name)) {
-      alert(`${name} is alredy in contacts.`);
-      this.reset();
-      return;
-    }
+    // if (this.props.exsisted(name)) {
+    //   alert(`${name} is alredy in contacts.`);
+    //   this.reset();
+    //   return;
+    // }
 
     this.props.onAddNewContact(name, number);
 
@@ -87,7 +87,6 @@ class ContactForm extends Component {
 
 const mapDispatchToProps = dispatch => ({
   onAddNewContact: (name, number) => dispatch(actions.addContact(name, number)),
-  exsisted: name => dispatch(actions.getExsistedContact(name)),
 });
 
 export default connect(null, mapDispatchToProps)(ContactForm);
